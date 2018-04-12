@@ -78,4 +78,4 @@ class TransactionItem
 end
 ```
 7. Tried to finish the test case and let it become green light, iterator the process till the user requriement all meet:) 
-> test case -> red light -> implment detail -> green light -> back to test case
+> Test case -> red light -> implment detail -> green light -> back to test case
