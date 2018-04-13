@@ -7,7 +7,4 @@ class TransactionItem
     @code = code
     @memo = memo
   end
-
-  
-
 end

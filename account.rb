@@ -17,7 +17,7 @@ class Account
     @balance
   end
   
-  def desposit(trans)
+  def deposit(trans)
     @mutex.synchronize do
       if trans.amount <= 0
         puts "Input amount '#{trans.amount}' invalid"

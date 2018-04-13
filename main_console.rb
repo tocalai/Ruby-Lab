@@ -5,11 +5,8 @@ include OperationResult
 include OperationCode
 
 test_account = Account.new('TestAccount1', 100_100)
-desposit_trans = TransactionItem.new(Time.new, 10, DESPOSIT, 'Desposit by Alice')
-test_account.desposit(desposit_trans)
-
-withdraw_trans_over_balance = TransactionItem.new(Time.new, 100_101, WITHDRAW, 'Withdraw by Bob')
-#test_account.withdraw(withdraw_trans_over_balance)
+deposit_trans = TransactionItem.new(Time.new, 10, DEPOSIT, 'Desposit by Alice')
+test_account.deposit(deposit_trans)
 
 withdraw_trans = TransactionItem.new(Time.new, 100, WITHDRAW, 'Withdraw by Tom')
 test_account.withdraw(withdraw_trans)

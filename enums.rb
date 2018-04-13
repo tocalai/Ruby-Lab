@@ -7,7 +7,7 @@ module OperationResult
 end
 
 module OperationCode
-    DESPOSIT = 1
+    DEPOSIT = 1
     WITHDRAW = 2
     SHOWBALANCE = 3
     CHECKHISTORY = 4

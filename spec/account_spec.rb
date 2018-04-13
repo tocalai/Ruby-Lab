@@ -9,24 +9,24 @@ RSpec.describe Account do
     before(:all) do
           @inital_balance = 100_100
           @test_account = Account.new('TestAccount1', @inital_balance)
-          @desposit_amount = 10
+          @deposit_amount = 10
           @withdraw_amount = 100
           @history_count = 5
     end
-    describe ".desposit" do        
+    describe ".deposit" do        
         context 'When transaction amount > 0' do
             it 'Should return balance = balance + amount' do
-                @trans = TransactionItem.new(Time.new, @desposit_amount, DESPOSIT, 'Desposit test')
-                @test_account.desposit(@trans)               
-                @expected = @inital_balance + @desposit_amount 
+                @trans = TransactionItem.new(Time.new, @deposit_amount, DEPOSIT, 'Deposit test')
+                @test_account.deposit(@trans)               
+                @expected = @inital_balance + @deposit_amount 
                 expect(@test_account.get_balance).to eq @expected
             end
         end
         
         context 'When transaction amount <= 0' do
             it 'Should return intput amount [x] invalid' do
-                @trans =  TransactionItem.new(Time.new, -1, DESPOSIT, 'Desposit invalid test')
-                @result = @test_account.desposit(@trans)
+                @trans =  TransactionItem.new(Time.new, -1, DEPOSIT, 'Deposit invalid test')
+                @result = @test_account.deposit(@trans)
                 expect(@result).to eq INVALIDINPUT
             end
         end
@@ -45,7 +45,7 @@ RSpec.describe Account do
             it 'Should return balance = balance - amount' do
                 @trans =  TransactionItem.new(Time.new, @withdraw_amount, WITHDRAW, 'withdraw test')
                 @result = @test_account.withdraw(@trans)             
-                @expected = @inital_balance + @desposit_amount -  @withdraw_amount
+                @expected = @inital_balance + @deposit_amount -  @withdraw_amount
                 expect(@test_account.get_balance).to eq @expected
             end
         end
@@ -68,23 +68,23 @@ RSpec.describe Account do
         end
     end
 
-    describe '.desposit, .witdraw' do
-        context 'Perforn desposit and withdraw under multi-thread' do
+    describe '.deposit, .witdraw' do
+        context 'Perforn deposit and withdraw under multi-thread' do
             it 'Should return correct balance under the condition' do
                 @test_account = Account.new('TestAccount2', @inital_balance)
                 @concurrent_threads = 3
                 @repeat_count = 100
-                @threads_desposit = []
+                @threads_deposit = []
                 @threads_withdraw = []
                 for i in 1..@concurrent_threads do
-                    @t_desposit = Thread.new {
+                    @t_deposit = Thread.new {
                        for j in 1..@repeat_count do
-                          @trans_desposit = TransactionItem.new(Time.new, @desposit_amount, DESPOSIT, 'Desposit test')
-                          @test_account.desposit(@trans_desposit)
+                          @trans_deposit = TransactionItem.new(Time.new, @deposit_amount, DEPOSIT, 'Deposit test')
+                          @test_account.deposit(@trans_deposit)
                        end
                     }
 
-                    @threads_desposit.push(@t_desposit)
+                    @threads_deposit.push(@t_deposit)
 
                     @t_withdraw = Thread.new {
                        @trans_withdraw =  TransactionItem.new(Time.new, @withdraw_amount, WITHDRAW, 'withdraw test')
@@ -93,10 +93,10 @@ RSpec.describe Account do
                     
                     @threads_withdraw.push(@t_withdraw)
                 end
-                 @threads_desposit.each {|t| t.join}
+                 @threads_deposit.each {|t| t.join}
                  @threads_withdraw.each {|t| t.join}
 
-                 @expected = @inital_balance + @concurrent_threads * @repeat_count * @desposit_amount - @concurrent_threads * @withdraw_amount
+                 @expected = @inital_balance + @concurrent_threads * @repeat_count * @deposit_amount - @concurrent_threads * @withdraw_amount
                  expect(@test_account.get_balance).to eq @expected
             end
         end
