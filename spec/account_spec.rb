@@ -52,7 +52,7 @@ RSpec.describe Account do
     end
 
     describe '.show_history' do
-        context "When show the #{@history_count} first records" do
+        context "When show the #{@history_count} records" do
             it 'Should return succeed and print out the transaction history' do
                @result = @test_account.show_history(@history_count)
                expect(@result).to eq SUCCEEDED 
@@ -69,7 +69,7 @@ RSpec.describe Account do
     end
 
     describe '.deposit, .witdraw' do
-        context 'Perforn deposit and withdraw under multi-thread' do
+        context 'Perform deposit and withdraw under multi-thread' do
             it 'Should return correct balance under the condition' do
                 @test_account = Account.new('TestAccount2', @inital_balance)
                 @concurrent_threads = 3
