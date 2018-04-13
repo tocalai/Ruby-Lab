@@ -79,3 +79,6 @@ end
 ```
 7. Tried to finish the test case and let it become green light, iterator the process till the user requriement all meet:) 
 > Test case -> red light -> implment detail -> green light -> back to test case
+
+* Exmaple of test case that simulate concurrent environment
+![Multi-threading](https://github.com/tocalai/Ruby-Lab/blob/master/image/transaction_concurrent.png)
